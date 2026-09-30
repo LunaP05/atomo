@@ -1,123 +1,171 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <title>Átomo de Silicio Animado</title>
-  <style>
-    body {
-      background-color: transparent;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      margin: 0;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    }
-    .atom-container {
-      position: relative;
-      width: 400px;
-      height: 400px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-    .nucleus {
-      position: absolute;
-      width: 80px;
-      height: 80px;
-      background: radial-gradient(circle, #ff4d4d 0%, #cc0000 100%);
-      border-radius: 50%;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      box-shadow: 0 0 20px rgba(255, 77, 77, 0.6);
-      animation: pulse 2s infinite ease-in-out;
-      z-index: 10;
-    }
-    .proton, .neutron {
-      position: absolute;
-      font-size: 11px;
-      font-weight: bold;
-      color: white;
-    }
-    .proton { top: 20px; left: 15px; }
-    .neutron { bottom: 20px; right: 15px; }
-    @keyframes pulse {
-      0% { transform: scale(1); box-shadow: 0 0 15px rgba(255, 77, 77, 0.5); }
-      50% { transform: scale(1.08); box-shadow: 0 0 25px rgba(255, 77, 77, 0.8); }
-      100% { transform: scale(1); box-shadow: 0 0 15px rgba(255, 77, 77, 0.5); }
-    }
-    .orbit {
-      position: absolute;
-      border: 1px dashed rgba(255, 255, 255, 0.3);
-      border-radius: 50%;
-    }
-    .orbit-1 { width: 140px; height: 140px; animation: spin 8s linear infinite; }
-    .orbit-2 { width: 260px; height: 260px; animation: spin-reverse 14s linear infinite; }
-    .orbit-3 { width: 380px; height: 380px; animation: spin 20s linear infinite; }
-    .electron {
-      position: absolute;
-      width: 22px;
-      height: 22px;
-      background: radial-gradient(circle, #94a3b8 0%, #475569 100%);
-      border-radius: 50%;
-      font-size: 9px;
-      color: white;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      box-shadow: 0 0 8px rgba(148, 163, 184, 0.8);
-    }
-    .e-1 { top: -11px; left: 59px; }
-    .e-2 { bottom: -11px; left: 59px; }
-    .e-3 { top: -11px; left: 119px; }
-    .e-4 { bottom: -11px; left: 119px; }
-    .e-5 { top: 38px; left: -11px; }
-    .e-6 { bottom: 38px; left: -11px; }
-    .e-7 { top: 38px; right: -11px; }
-    .e-8 { bottom: 38px; right: -11px; }
-    .e-9 { top: 100px; left: -11px; }
-    .e-10 { bottom: 100px; right: -11px; }
-    .e-11 { top: -11px; left: 179px; }
-    .e-12 { bottom: -11px; left: 179px; }
-    .e-13 { top: 179px; left: -11px; }
-    .e-14 { top: 179px; right: -11px; }
-    @keyframes spin {
-      0% { transform: rotate(0deg); }
-      100% { transform: rotate(360deg); }
-    }
-    @keyframes spin-reverse {
-      0% { transform: rotate(360deg); }
-      100% { transform: rotate(0deg); }
-    }
-  </style>
+<meta charset="UTF-8">
+<title>Átomo de Silicio Animado</title>
+<style>
+  body {
+    background-color: transparent;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    overflow: hidden;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+
+  .atom-container {
+    position: relative;
+    width: 500px;
+    height: 500px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  /* Núcleo */
+  .nucleus {
+    position: absolute;
+    width: 110px;
+    height: 110px;
+    background: radial-gradient(circle, #ff4d4d 0%, #b30000 100%);
+    border-radius: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-weight: bold;
+    font-size: 13px;
+    box-shadow: 0 0 15px rgba(255, 0, 0, 0.6);
+    z-index: 10;
+    animation: pulse 2s infinite ease-in-out;
+    text-align: center;
+    line-height: 1.2;
+  }
+
+  .nucleus span.neutron {
+    background: rgba(0, 0, 150, 0.4);
+    padding: 2px 6px;
+    border-radius: 10px;
+    font-size: 11px;
+    margin-top: 2px;
+  }
+
+  @keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.06); }
+  }
+
+  /* Órbitas */
+  .orbit {
+    position: absolute;
+    border: 1px dashed rgba(255, 255, 255, 0.4);
+    border-radius: 50%;
+    animation: spin linear infinite;
+  }
+
+  /* Capa 1 (2 electrones) */
+  .orbit-1 {
+    width: 160px;
+    height: 160px;
+    animation-duration: 6s;
+  }
+
+  /* Capa 2 (8 electrones) */
+  .orbit-2 {
+    width: 320px;
+    height: 320px;
+    animation-duration: 12s;
+    animation-direction: reverse;
+  }
+
+  /* Capa 3 (4 electrones) */
+  .orbit-3 {
+    width: 460px;
+    height: 460px;
+    animation-duration: 18s;
+  }
+
+  @keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+  }
+
+  /* Electrones */
+  .electron {
+    position: absolute;
+    top: -10px;
+    left: calc(50% - 10px);
+    width: 20px;
+    height: 20px;
+    background: radial-gradient(circle, #e6e6e6 0%, #8c8c8c 100%);
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 9px;
+    font-weight: bold;
+    color: #333;
+    box-shadow: 0 0 5px rgba(255, 255, 255, 0.8);
+  }
+
+  /* Distribuir electrones en las órbitas usando transformaciones */
+  .orbit-1 .e1 { transform: rotate(0deg) translate(80px) rotate(0deg); }
+  .orbit-1 .e2 { transform: rotate(180deg) translate(80px) rotate(-180deg); }
+
+  .orbit-2 .e1 { transform: rotate(0deg) translate(160px) rotate(0deg); }
+  .orbit-2 .e2 { transform: rotate(45deg) translate(160px) rotate(-45deg); }
+  .orbit-2 .e3 { transform: rotate(90deg) translate(160px) rotate(-90deg); }
+  .orbit-2 .e4 { transform: rotate(135deg) translate(160px) rotate(-135deg); }
+  .orbit-2 .e5 { transform: rotate(180deg) translate(160px) rotate(-180deg); }
+  .orbit-2 .e6 { transform: rotate(225deg) translate(160px) rotate(-225deg); }
+  .orbit-2 .e7 { transform: rotate(270deg) translate(160px) rotate(-270deg); }
+  .orbit-2 .e8 { transform: rotate(315deg) translate(160px) rotate(-315deg); }
+
+  .orbit-3 .e1 { transform: rotate(0deg) translate(230px) rotate(0deg); }
+  .orbit-3 .e2 { transform: rotate(90deg) translate(230px) rotate(-90deg); }
+  .orbit-3 .e3 { transform: rotate(180deg) translate(230px) rotate(-180deg); }
+  .orbit-3 .e4 { transform: rotate(270deg) translate(230px) rotate(-270deg); }
+
+</style>
 </head>
 <body>
-  <div class="atom-container">
+
+<div class="atom-container">
+    <!-- Núcleo con protones y neutrones -->
     <div class="nucleus">
-      <div class="proton">14 p⁺</div>
-      <div class="neutron">14 nº</div>
+      14 p⁺
+      <span class="neutron">14 n⁰</span>
     </div>
+
+    <!-- Capa 1 (2 electrones) -->
     <div class="orbit orbit-1">
-      <div class="electron e-1">e⁻</div>
-      <div class="electron e-2">e⁻</div>
+      <div class="electron e1">e⁻</div>
+      <div class="electron e2">e⁻</div>
     </div>
+
+    <!-- Capa 2 (8 electrones) -->
     <div class="orbit orbit-2">
-      <div class="electron e-3">e⁻</div>
-      <div class="electron e-4">e⁻</div>
-      <div class="electron e-5">e⁻</div>
-      <div class="electron e-6">e⁻</div>
-      <div class="electron e-7">e⁻</div>
-      <div class="electron e-8">e⁻</div>
-      <div class="electron e-9">e⁻</div>
-      <div class="electron e-10">e⁻</div>
+      <div class="electron e1">e⁻</div>
+      <div class="electron e2">e⁻</div>
+      <div class="electron e3">e⁻</div>
+      <div class="electron e4">e⁻</div>
+      <div class="electron e5">e⁻</div>
+      <div class="electron e6">e⁻</div>
+      <div class="electron e7">e⁻</div>
+      <div class="electron e8">e⁻</div>
     </div>
+
+    <!-- Capa 3 (4 electrones) -->
     <div class="orbit orbit-3">
-      <div class="electron e-11">e⁻</div>
-      <div class="electron e-12">e⁻</div>
-      <div class="electron e-13">e⁻</div>
-      <div class="electron e-14">e⁻</div>
+      <div class="electron e1">e⁻</div>
+      <div class="electron e2">e⁻</div>
+      <div class="electron e3">e⁻</div>
+      <div class="electron e4">e⁻</div>
     </div>
-  </div>
+</div>
+
 </body>
 </html>
